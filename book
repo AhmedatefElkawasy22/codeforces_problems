@@ -1,0 +1,195 @@
+https://codeforces.com/group/u3Ii79X3NY/contest/272628/submission/221572598
+_________________________________________________
+// بسم الله الرحمن الرحيم
+// AHMED ATEF ELKAWASY
+#include <bits/stdc++.h>
+#define ll long long
+#define ld long double
+#define ed '\n'
+#define fixed(x) fixed << setprecision(x)
+#define f(i, n) for (int i = 0; i < n; i++)
+#define copy copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "))
+#define all(x) x.begin(), x.end()
+constexpr ll oo = 0x3f3f3f3f3f3f3f3f;
+const double pi = 3.141592653589;
+using namespace std;
+void AHMED()
+{ // for VS code
+    ios_base::sync_with_stdio(false);
+    cout.tie(nullptr);
+    cin.tie(nullptr);
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+ll gcd(ll a, ll b)
+{
+    if (b == 0)
+        return a;
+    else
+        return gcd(b, a % b);
+}
+ll lcm(ll a, ll b)
+{
+    return a * b / gcd(a, b);
+}
+ll summation(ll n)
+{
+    return (n * (n + 1)) / 2;
+}
+bool prime(ll n)
+{
+    if (n == 1)
+    {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool plindrome_arr(ll arr[], ll arr_size)
+{
+    for (int i = 0; i <= arr_size / 2; i++)
+    {
+        if (arr[i] != arr[arr_size - i - 1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool plindrome_string(string s)
+{
+    ll s_size = s.size();
+    for (int i = 0; i <= s_size / 2; i++)
+    {
+        if (s[i] != s[s_size - i - 1])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool plindrome_number(ll n)
+{
+    ll temp = n, res = 0, mod;
+    while (n > 0)
+    {
+        mod = n % 10;
+        res = (res * 10) + mod;
+        n /= 10;
+    }
+    if (temp == res)
+        return true;
+    else
+        return false;
+}
+ll SumEven(ll a, ll b)
+{
+    ll mx = max(a, b);
+    ll mn = min(a, b);
+    mn--;
+    ll n1 = (mx / 2) * ((mx / 2) + 1);
+    ll n2 = (mn / 2) * ((mn / 2) + 1);
+    return abs(n1 - n2);
+}
+ll SumOdd(ll a, ll b)
+{
+    ll mx = max(a, b);
+    ll mn = min(a, b);
+    mn--;
+    ll n1 = pow(((mx + 1) / 2), 2);
+    ll n2 = pow(((mn + 1) / 2), 2);
+    return abs(n1 - n2);
+}
+ll nCr(ll n, ll r)
+{
+    ll res = 1;
+    ll temp = 2;
+    for (int i = r + 1; i <= n; i++)
+    {
+        res *= i;
+        if (temp <= n - r && res % temp == 0)
+        {
+            res /= temp;
+            temp++;
+        }
+    }
+    return res;
+}
+ll nPr(ll n, ll r)
+{
+    ll res = 1;
+    ll temp = 2;
+    for (int i = 2; i <= n; i++)
+    {
+        res *= i;
+        if (temp <= n - r && res % temp == 0)
+        {
+            res /= temp;
+            temp++;
+        }
+    }
+    return res;
+}
+bool sort_pair(pair<int, string> a, pair<int, string> b)
+{
+    if (a.first == b.first)
+        return a.second < b.second;
+    return a.first > b.first;
+}
+void PrimeFactors(ll n)
+{
+    for (ll i = 2; i * i <= n; i++)
+    {
+        while (n % i == 0)
+        {
+            // st.insert(i);
+            n /= i;
+        }
+    }
+    if (n > 1)
+    {
+        // st.insert(n);
+    }
+}
+
+// int frq[10000000];
+int main()
+{
+    AHMED();
+
+    // freopen("median.in", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        ll n, m;
+        cin >> n >> m;
+        vector<ll> v(n);
+        for (auto &it : v)
+            cin >> it;
+        ll l = 0, r = 0, sum = 0, fsum = 0;
+        while (r < n)
+        {
+            sum += v[r];
+            while (sum > m)
+            {
+                sum -= v[l];
+                l++;
+            }
+            fsum = max(fsum, r - l + 1);
+            r++;
+        }
+        cout << fsum << ed;
+    }
+
+    return 0;
+}
